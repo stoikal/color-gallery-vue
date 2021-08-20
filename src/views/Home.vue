@@ -37,7 +37,7 @@ export default {
       return this.colorList
         .filter((colorHex) => {
           const [r, g, b] = hexToRgb(colorHex);
-          const threshold = 0.5;
+          const threshold = 0.6;
 
           if (this.filter.reddish && r / 255 < threshold) {
             return false;
