@@ -10,6 +10,7 @@
 import ColorInput from '../components/ColorInput/ColorInput.vue';
 import ColorFilter from '../components/ColorFilter/ColorFilter.vue';
 import ColorView from '../components/ColorView/ColorView.vue';
+import hexToRgb from '../utils/hexToRgb';
 
 const initialColors = [
   '#A31621', '#BFDBF7', '#053C5E', '#1F7A8C', '#DB222A',
@@ -18,39 +19,40 @@ const initialColors = [
   '#04724D', '#9BC53D', '#C3423F', '#FDE74C', '#004F2D',
 ]
 
+const initialFilter = {
+  reddish: false,
+  greenish: false,
+  blueish: false,
+}
+
 export default {
   data: function () {
     return {
       colorList: initialColors,
-      filter: {}
+      filter: initialFilter,
     }
   },
   computed: {
     filteredColorList() {
-      return this.colorList;
+      return this.colorList
+        .filter((colorHex) => {
+          const [r, g, b] = hexToRgb(colorHex);
+          const threshold = 0.5;
 
+          if (this.filter.reddish && r / 255 < threshold) {
+            return false;
+          }
 
-      // return this.colorList
-      //   .map(color => color)
-        // .filter(() => true)
-        // .filter((color) => {
-        //   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
-        //   const threshold = 128;
+          if (this.filter.greenish && g / 255 < threshold) {
+            return false;
+          }
 
-        //   if (this.filter.reddish && parseInt(result[1], 16) < threshold) {
-        //     return false;
-        //   }
+          if (this.filter.blueish && b / 255 < threshold) {
+            return false;
+          }
 
-        //   if (this.filter.greenish && parseInt(result[2], 16) < threshold) {
-        //     return false;
-        //   }
-
-        //   if (this.filter.blueish && parseInt(result[3], 16) < threshold) {
-        //     return false;
-        //   }
-
-        //   return true
-        // })
+          return true
+        })
     }
   },
   methods: {

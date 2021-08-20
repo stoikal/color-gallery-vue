@@ -1,7 +1,7 @@
 <template>
   <div class="grid-container">
     <color-box 
-      v-for="color in list" 
+      v-for="color of colorList" 
       v-bind:key="color"
       v-bind:color="color"
     ></color-box>
@@ -12,14 +12,9 @@
 import ColorBox from '../ColorBox/ColorBox.vue';
 export default {
   props: ['colorList'],
-  data() {
-    return {
-      list: this.colorList
-    }
-  },
   components: {
     ColorBox
-  }
+  },
 }
 </script>
 
