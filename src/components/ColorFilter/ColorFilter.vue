@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <label>
       <input @change="handleChange" name="reddish" type="checkbox" />
       reddish
@@ -25,3 +25,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.container {
+  padding: 1em;
+}
+</style>
