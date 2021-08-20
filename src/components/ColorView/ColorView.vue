@@ -4,6 +4,7 @@
       v-for="color of colorList" 
       v-bind:key="color"
       v-bind:color="color"
+      @onRemove="$emit('removeColor', color)"
     ></color-box>
   </div>
 </template>
@@ -22,7 +23,7 @@ export default {
 .grid-container {
   margin: 1em;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 80px));
+  grid-template-columns: repeat(auto-fit, minmax(100px, 100px));
   gap: 1em;
   padding: 1em;
 }

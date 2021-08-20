@@ -2,7 +2,7 @@
   <div id="home">
     <color-input v-on:addColor="handleAddColor"/>
     <color-filter v-on:filterChange="handleFilterChange"/>
-    <color-view v-bind:color-list="filteredColorList"/>
+    <color-view v-bind:color-list="filteredColorList" v-on:removeColor="handleRemoveColor"/>
   </div>
 </template>
 
@@ -62,6 +62,11 @@ export default {
       } else {
         this.colorList.push(newColor);
       }
+    },
+    handleRemoveColor: function(colorToRemove) {
+      const index = this.colorList.indexOf(colorToRemove);
+
+      this.colorList = [...this.colorList.slice(0, index), ...this.colorList.slice(index + 1)]
     },
     handleFilterChange: function({ name, checked }) {
       this.filter[name] = checked
