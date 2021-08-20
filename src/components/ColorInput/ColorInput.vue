@@ -1,6 +1,6 @@
 <template>
   <form v-on:submit.prevent="handleSubmit">
-    <input v-model="colorHex"/>
+    <input type="color" v-model="colorHex"/>
     <button v-bind:disabled="disableButton">Add color</button>
   </form>
 </template>
